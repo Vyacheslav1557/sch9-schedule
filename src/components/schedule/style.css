@@ -1,0 +1,39 @@
+* {
+    color: #202020;
+}
+
+.cell {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.schedule {
+    & td, & th {
+        padding: 8px;
+        border-bottom: 2px solid var(--mantine-color-gray-2);
+    }
+
+    & th {
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+
+    & tr:last-child {
+        & td, & th {
+            border: none;
+        }
+
+        & td {
+            padding-bottom: 0;
+        }
+    }
+
+    /*& tr:first-child {*/
+    /*    & th {*/
+    /*        !*border-color: black;*!*/
+    /*        border: none;*/
+    /*    }*/
+    /*}*/
+}
