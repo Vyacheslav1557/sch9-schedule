@@ -4,10 +4,7 @@ import {Schedule} from "@/src/components/schedule";
 export default function Page() {
     return (
         <div className="wrapper">
-            <main style={{width: "fit-content"}} className="desktop">
-                {
-                    // className="desktop"
-                }
+            <main style={{width: "fit-content"}}>
                 <Schedule/>
             </main>
             <SideBar/>

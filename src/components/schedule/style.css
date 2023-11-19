@@ -29,11 +29,22 @@
             padding-bottom: 0;
         }
     }
+}
 
-    /*& tr:first-child {*/
-    /*    & th {*/
-    /*        !*border-color: black;*!*/
-    /*        border: none;*/
-    /*    }*/
-    /*}*/
+.day {
+    padding: 8px;
+    background-color: var(--mantine-color-white);
+
+    &:hover {
+        background-color: var(--mantine-color-gray-1);
+    }
+}
+
+.day-selected {
+    padding: 8px;
+    background-color: var(--mantine-color-blue-2);
+
+    &:hover {
+        background-color: var(--mantine-color-blue-3);
+    }
 }

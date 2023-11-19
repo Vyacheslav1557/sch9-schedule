@@ -1,12 +1,13 @@
-.mantine-Select-dropdown {
+.mantine-Combobox-dropdown {
     border-radius: 6px;
-    @media screen and (max-width: 1365px) {
-        box-shadow: 0 0 2px 2px #fdfdfd;
-    }
 }
 
-.mantine-Select-input, .mantine-Button-root {
-    height: 45px;
+.mantine-Button-root, .mantine-InputBase-input {
+    height: 54px;
+}
+
+.mantine-InputBase-input {
+    border-radius: 6px;
 }
 
 .sidebar {
@@ -19,5 +20,6 @@
         flex-direction: row;
         width: fit-content;
         align-self: flex-end;
+        justify-content: space-around;
     }
 }

@@ -1,7 +1,9 @@
+'use client'
 import React from 'react';
-import {Stack} from "@mantine/core";
+import {Stack, Group, Button, ActionIcon} from "@mantine/core";
 import "./style.css"
-import {IconClock} from "@tabler/icons-react";
+import {IconChevronLeft, IconChevronRight, IconClock} from "@tabler/icons-react";
+import {useMediaQuery} from "@mantine/hooks";
 
 const headers = [
     "14\nПН",
@@ -26,12 +28,15 @@ const time = [
 interface ICell {
     text: string
     color: string
+    fullwidth: boolean
 }
 
-const Cell = ({text, color}: ICell) => {
+const Cell = ({text, color, fullwidth}: ICell) => {
+    const w = fullwidth ? "100%" : "120px"
+
     return (
         <div style={{
-            width: "120px",
+            width: w,
             height: "60px",
             backgroundColor: color,
             borderRadius: "6px 10px 10px 6px",
@@ -56,7 +61,44 @@ const Cell = ({text, color}: ICell) => {
     );
 }
 
+
+const WeekNav = () => {
+    return (
+        <div style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            gap: "4px"
+        }}>
+            <ActionIcon className="day" size={36} px={0}><IconChevronLeft/></ActionIcon>
+            <div style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                gap: "2px"
+            }}>
+                {headers.map((item, index) => (
+                    <div style={{
+                        fontWeight: 600,
+                        display: "inline",
+                        borderRadius: "6px",
+                        textAlign: "center",
+                    }} key={index}>
+                        <Button className={index === 0 ? "day-selected" : "day"}>
+                            <pre style={{margin: 0}}>{item}</pre>
+                        </Button>
+                    </div>
+                ))}
+            </div>
+            <ActionIcon className="day" size={36} px={0}><IconChevronRight/></ActionIcon>
+        </div>
+    )
+}
+
 const Schedule = () => {
+    const isSmall = useMediaQuery("(max-width: 1080px)");
+
     const getTable = () => {
         let content = [];
         for (let i = 0; i < time.length; i++) {
@@ -65,27 +107,39 @@ const Schedule = () => {
                     <td style={{textAlign: "center"}}>
                         <span style={{width: "40px"}}><pre style={{margin: 0}}>{time[i]}</pre></span>
                     </td>
-                    <td>
-                        <Cell text='Классные часы "Разговоры о важном"' color="#5272E9"/>
-                    </td>
-                    <td>
-                        <Cell text="Физика" color="#52BCE9"/>
-                    </td>
-                    <td>
-                        <Cell text="Английский язык" color="#E952D1"/>
-                    </td>
-                    <td>
-                        <Cell text="Алгебра и начала математического анализа" color="#E98852"/>
-                    </td>
-                    <td>
-                        <Cell text="Геометрия" color="#43DC40"/>
-                    </td>
-                    <td>
-                        <Cell text="Физическая культура" color="#E9525B"/>
-                    </td>
-                    <td>
-                        <Cell text="Русский язык" color="#7500EA"/>
-                    </td>
+                    {
+                        isSmall ?
+                            <>
+                                <td>
+                                    <Cell text='Классные часы "Разговоры о важном"' color="#5272E9" fullwidth/>
+                                </td>
+                            </>
+                            :
+                            <>
+                                <td>
+                                    <Cell text='Классные часы "Разговоры о важном"' color="#5272E9" fullwidth={false}/>
+                                </td>
+                                <td>
+                                    <Cell text="Физика" color="#52BCE9" fullwidth={false}/>
+                                </td>
+                                <td>
+                                    <Cell text="Английский язык" color="#E952D1" fullwidth={false}/>
+                                </td>
+                                <td>
+                                    <Cell text="Алгебра и начала математического анализа" color="#E98852"
+                                          fullwidth={false}/>
+                                </td>
+                                <td>
+                                    <Cell text="Геометрия" color="#43DC40" fullwidth={false}/>
+                                </td>
+                                <td>
+                                    <Cell text="Физическая культура" color="#E9525B" fullwidth={false}/>
+                                </td>
+                                <td>
+                                    <Cell text="Русский язык" color="#7500EA" fullwidth={false}/>
+                                </td>
+                            </>
+                    }
                 </tr>
             )
         }
@@ -93,7 +147,13 @@ const Schedule = () => {
     };
 
     return (
-        <div className="rounded" style={{padding: "20px"}}>
+        <div className="rounded" style={isSmall ? {padding: "10px 5px"} : {padding: "20px"}}>
+            {
+                isSmall ?
+                    <WeekNav/>
+                    :
+                    <></>
+            }
             <table style={{
                 width: "100%",
                 height: "100%",
@@ -101,14 +161,20 @@ const Schedule = () => {
                 borderCollapse: "collapse",
             }} className="schedule">
                 <thead>
-                <tr style={{textAlign: "center", width: "100%"}}>
-                    <th></th>
-                    {headers.map((item, index) => (
-                        <th style={{fontWeight: 600}} key={index}>
-                            <span><pre style={{margin: 0}}>{item}</pre></span>
-                        </th>
-                    ))}
-                </tr>
+                {
+                    isSmall ?
+                        <></>
+                        :
+                        <tr style={{textAlign: "center", width: "100%"}}>
+                            <th></th>
+                            {headers.map((item, index) => (
+                                <th style={{fontWeight: 600}} key={index}>
+                                    <span><pre style={{margin: 0}}>{item}</pre></span>
+                                </th>
+                            ))}
+
+                        </tr>
+                }
                 </thead>
                 <tbody>
                 {getTable()}
