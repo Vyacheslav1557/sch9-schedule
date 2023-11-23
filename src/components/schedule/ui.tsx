@@ -3,7 +3,6 @@ import React from 'react';
 import {Stack, Group, Button, ActionIcon} from "@mantine/core";
 import "./style.css"
 import {IconChevronLeft, IconChevronRight, IconClock} from "@tabler/icons-react";
-import {useMediaQuery} from "@mantine/hooks";
 
 const headers = [
     "14\nПН",
@@ -97,8 +96,6 @@ const WeekNav = () => {
 }
 
 const Schedule = () => {
-    const isSmall = useMediaQuery("(max-width: 1080px)");
-
     const getTable = () => {
         let content = [];
         for (let i = 0; i < time.length; i++) {
@@ -107,39 +104,31 @@ const Schedule = () => {
                     <td style={{textAlign: "center"}}>
                         <span style={{width: "40px"}}><pre style={{margin: 0}}>{time[i]}</pre></span>
                     </td>
-                    {
-                        isSmall ?
-                            <>
-                                <td>
-                                    <Cell text='Классные часы "Разговоры о важном"' color="#5272E9" fullwidth/>
-                                </td>
-                            </>
-                            :
-                            <>
-                                <td>
-                                    <Cell text='Классные часы "Разговоры о важном"' color="#5272E9" fullwidth={false}/>
-                                </td>
-                                <td>
-                                    <Cell text="Физика" color="#52BCE9" fullwidth={false}/>
-                                </td>
-                                <td>
-                                    <Cell text="Английский язык" color="#E952D1" fullwidth={false}/>
-                                </td>
-                                <td>
-                                    <Cell text="Алгебра и начала математического анализа" color="#E98852"
-                                          fullwidth={false}/>
-                                </td>
-                                <td>
-                                    <Cell text="Геометрия" color="#43DC40" fullwidth={false}/>
-                                </td>
-                                <td>
-                                    <Cell text="Физическая культура" color="#E9525B" fullwidth={false}/>
-                                </td>
-                                <td>
-                                    <Cell text="Русский язык" color="#7500EA" fullwidth={false}/>
-                                </td>
-                            </>
-                    }
+                    <td className="small">
+                        <Cell text='Классные часы "Разговоры о важном"' color="#5272E9" fullwidth/>
+                    </td>
+                    <td className="big">
+                        <Cell text='Классные часы "Разговоры о важном"' color="#5272E9" fullwidth={false}/>
+                    </td>
+                    <td className="big">
+                        <Cell text="Физика" color="#52BCE9" fullwidth={false}/>
+                    </td>
+                    <td className="big">
+                        <Cell text="Английский язык" color="#E952D1" fullwidth={false}/>
+                    </td>
+                    <td className="big">
+                        <Cell text="Алгебра и начала математического анализа" color="#E98852"
+                              fullwidth={false}/>
+                    </td>
+                    <td className="big">
+                        <Cell text="Геометрия" color="#43DC40" fullwidth={false}/>
+                    </td>
+                    <td className="big">
+                        <Cell text="Физическая культура" color="#E9525B" fullwidth={false}/>
+                    </td>
+                    <td className="big">
+                        <Cell text="Русский язык" color="#7500EA" fullwidth={false}/>
+                    </td>
                 </tr>
             )
         }
@@ -147,13 +136,10 @@ const Schedule = () => {
     };
 
     return (
-        <div className="rounded" style={isSmall ? {padding: "10px 5px"} : {padding: "20px"}}>
-            {
-                isSmall ?
-                    <WeekNav/>
-                    :
-                    <></>
-            }
+        <div className="rounded schedule__wrapper">
+            <div className="small">
+                <WeekNav/>
+            </div>
             <table style={{
                 width: "100%",
                 height: "100%",
@@ -161,20 +147,15 @@ const Schedule = () => {
                 borderCollapse: "collapse",
             }} className="schedule">
                 <thead>
-                {
-                    isSmall ?
-                        <></>
-                        :
-                        <tr style={{textAlign: "center", width: "100%"}}>
-                            <th></th>
-                            {headers.map((item, index) => (
-                                <th style={{fontWeight: 600}} key={index}>
-                                    <span><pre style={{margin: 0}}>{item}</pre></span>
-                                </th>
-                            ))}
+                <tr className="big" style={{textAlign: "center", width: "100%"}}>
+                    <th></th>
+                    {headers.map((item, index) => (
+                        <th style={{fontWeight: 600}} key={index}>
+                            <span><pre style={{margin: 0}}>{item}</pre></span>
+                        </th>
+                    ))}
 
-                        </tr>
-                }
+                </tr>
                 </thead>
                 <tbody>
                 {getTable()}

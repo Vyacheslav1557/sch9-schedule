@@ -71,3 +71,23 @@ body {
         padding: 10px;
     }
 }
+
+
+.small {
+}
+
+.big {
+
+}
+
+@media screen and (min-width: 1080px) {
+    .small {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1079px) {
+    .big {
+        display: none;
+    }
+}

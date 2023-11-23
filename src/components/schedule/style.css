@@ -48,3 +48,10 @@
         background-color: var(--mantine-color-blue-3);
     }
 }
+
+.schedule__wrapper {
+    padding: 10px 5px;
+    @media screen and (min-width: 1081px) {
+        padding: 20px;
+    }
+}

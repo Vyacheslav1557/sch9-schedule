@@ -135,8 +135,6 @@ const DayPicker = () => {
 const SideBar = () => {
     const [opened, {open, close}] = useDisclosure(false);
 
-    const isSmall = useMediaQuery("(max-width: 1080px)")
-
     return (
         <aside className="sidebar">
             <div className="desktop">
@@ -154,9 +152,8 @@ const SideBar = () => {
                     transitionProps={{transition: 'rotate-left'}}
                     size="auto"
                 >
-                    {
-                        isSmall ? <DayPicker/> : <WeekPicker/>
-                    }
+                    <div className="small"><DayPicker/></div>
+                    <div className="big"><WeekPicker/></div>
                 </Modal>
                 <Button onClick={open} variant="default" radius={6}>Выбрать дату</Button>
             </div>
