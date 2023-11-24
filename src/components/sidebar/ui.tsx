@@ -1,9 +1,8 @@
-'use client'
 import React, {useState} from 'react';
 import {Button, Combobox, Group, Input, InputBase, Modal, ScrollArea, Text, useCombobox} from "@mantine/core";
 import {WeekPicker} from "@/src/components/week-picker";
 import "./style.css"
-import {useDisclosure, useMediaQuery} from '@mantine/hooks';
+import {useDisclosure} from '@mantine/hooks';
 import {Calendar} from "@mantine/dates";
 import dayjs from "dayjs";
 
@@ -46,14 +45,15 @@ function SelectOption({value, description}: Item) {
 
 export function SelectOptionComponent() {
     const combobox = useCombobox({
-        onDropdownClose: () => combobox.resetSelectedOption()
+        onDropdownClose: () => {
+            combobox.resetSelectedOption();
+            close();
+        }
     });
 
     const [value, setValue] = useState<string | null>(null);
     const selectedOption = data.find((item) => item.value === value);
     const [opened, {open, close}] = useDisclosure(false);
-
-    const isSmall = useMediaQuery("(max-width: 1365px)")
 
     const options = data.map((item) => (
         <Combobox.Option value={item.value} key={item.value + item.description}>
@@ -67,7 +67,8 @@ export function SelectOptionComponent() {
             withinPortal={true}
             onOptionSubmit={(val) => {
                 setValue(val);
-                isSmall ? close() : combobox.closeDropdown();
+                close();
+                combobox.closeDropdown();
             }}
         >
             <Combobox.Target>
@@ -77,7 +78,8 @@ export function SelectOptionComponent() {
                     pointer
                     rightSection={<Combobox.Chevron/>}
                     onClick={() => {
-                        isSmall ? open() : combobox.openDropdown()
+                        open();
+                        combobox.openDropdown();
                     }}
                     rightSectionPointerEvents="none"
                     multiline
@@ -89,24 +91,21 @@ export function SelectOptionComponent() {
                     )}
                 </InputBase>
             </Combobox.Target>
-            {
-                isSmall ?
-                    <Modal opened={opened}
-                           onClose={close}
-                           size={284}
-                           transitionProps={{transition: 'rotate-left'}}
-                    >
-                        <ScrollArea.Autosize type="scroll" mah={400}>
-                            {options}
-                        </ScrollArea.Autosize>
-                    </Modal>
-                    :
-                    <Combobox.Dropdown>
-                        <ScrollArea.Autosize type="scroll" mah={260}>
-                            {options}
-                        </ScrollArea.Autosize>
-                    </Combobox.Dropdown>
-            }
+            <Modal opened={opened}
+                   onClose={close}
+                   size={284}
+                   transitionProps={{transition: 'rotate-left'}}
+                   className="tablet-or-mobile"
+            >
+                <ScrollArea.Autosize type="scroll" mah={400}>
+                    {options}
+                </ScrollArea.Autosize>
+            </Modal>
+            <Combobox.Dropdown className="desktop">
+                <ScrollArea.Autosize type="scroll" mah={260}>
+                    {options}
+                </ScrollArea.Autosize>
+            </Combobox.Dropdown>
         </Combobox>
     );
 }

@@ -1,4 +1,3 @@
-'use client'
 import React from 'react';
 import {Stack, Group, Button, ActionIcon} from "@mantine/core";
 import "./style.css"
