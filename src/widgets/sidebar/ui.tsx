@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Button, Combobox, Group, Input, InputBase, Modal, ScrollArea, Text, useCombobox} from "@mantine/core";
-import {WeekPicker} from "@/src/components/week-picker";
+import {WeekPicker} from "../week-picker";
 import "./style.css"
 import {useDisclosure} from '@mantine/hooks';
 import {Calendar} from "@mantine/dates";
