@@ -61,7 +61,6 @@ body {
     display: flex;
     justify-content: center;
     gap: 10px;
-    /*height: 100%;*/
     @media screen and (max-width: 1365px) {
         flex-direction: column-reverse;
         justify-content: flex-end;
