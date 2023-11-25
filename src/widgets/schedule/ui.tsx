@@ -2,26 +2,7 @@ import React from 'react';
 import {Stack, Group, Button, ActionIcon} from "@mantine/core";
 import "./style.css"
 import {IconChevronLeft, IconChevronRight, IconClock} from "@tabler/icons-react";
-
-const headers = [
-    "14\nПН",
-    "15\nВТ",
-    "16\nСР",
-    "17\nЧТ",
-    "18\nПТ",
-    "19\nСБ",
-    "20\nВС",
-]
-
-const time = [
-    "08:10\n08:50",
-    "09:05\n09:45",
-    "10:00\n10:40",
-    "11:00\n11:40",
-    "12:00\n12:40",
-    "12:50\n13:30",
-    "13:35\n14:15",
-]
+import {headers, time} from "@src/shared/api/temporary/api";
 
 interface ICell {
     text: string
