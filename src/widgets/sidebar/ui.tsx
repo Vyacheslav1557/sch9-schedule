@@ -1,35 +1,14 @@
 'use client';
 import React, {useState} from 'react';
 import {Button, Combobox, Group, Input, InputBase, Modal, ScrollArea, Text, useCombobox} from "@mantine/core";
-import {WeekPicker} from "../week-picker";
+import {WeekPicker} from "@src/widgets/week-picker";
 import "./style.css"
 import {useDisclosure} from '@mantine/hooks';
 import {Calendar} from "@mantine/dates";
 import dayjs from "dayjs";
+import {ClassesData as data, Item} from "@src/shared/api";
 
-let classes = [
-    "10 класс А",
-    "10 класс Б",
-    "10 класс В",
-    "8 класс A",
-    "8 класс Б",
-    "8 класс В",
-    "8 класс Г",
-]
-
-interface Item {
-    value: string;
-    description: string;
-}
-
-const data: Item[] = [];
-
-for (let i = 0; i < classes.length; i++) {
-    data.push({value: classes[i], description: "1 группа"})
-    data.push({value: classes[i], description: "2 группа"})
-}
-
-function SelectOption({value, description}: Item) {
+const SelectOption = ({value, description}: Item) => {
     return (
         <Group>
             <div>
@@ -44,7 +23,7 @@ function SelectOption({value, description}: Item) {
     );
 }
 
-export function SelectOptionComponent() {
+const SelectOptionComponent = () => {
     const combobox = useCombobox({
         onDropdownClose: () => {
             combobox.resetSelectedOption();
