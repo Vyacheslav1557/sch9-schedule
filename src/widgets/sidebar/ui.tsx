@@ -1,3 +1,4 @@
+'use client';
 import React, {useState} from 'react';
 import {Button, Combobox, Group, Input, InputBase, Modal, ScrollArea, Text, useCombobox} from "@mantine/core";
 import {WeekPicker} from "../week-picker";
