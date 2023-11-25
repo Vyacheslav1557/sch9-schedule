@@ -2,7 +2,7 @@ import React from 'react';
 import {Stack, Group, Button, ActionIcon} from "@mantine/core";
 import "./style.css"
 import {IconChevronLeft, IconChevronRight, IconClock} from "@tabler/icons-react";
-import {headers, time} from "@src/shared/api/temporary/api";
+import {headers, time} from "@src/shared/api";
 
 interface ICell {
     text: string
