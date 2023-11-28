@@ -1,94 +1,12 @@
 'use client';
 import React, {useState} from 'react';
-import {Button, Combobox, Group, Input, InputBase, Modal, ScrollArea, Text, useCombobox} from "@mantine/core";
+import {Button, Modal} from "@mantine/core";
 import {WeekPicker} from "@src/widgets/week-picker";
 import "./style.css"
 import {useDisclosure} from '@mantine/hooks';
 import {Calendar} from "@mantine/dates";
 import dayjs from "dayjs";
-import {ClassesData as data, Item} from "@src/shared/api";
-
-const SelectOption = ({value, description}: Item) => {
-    return (
-        <Group>
-            <div>
-                <Text fz="sm" fw={500}>
-                    {value}
-                </Text>
-                <Text fz="xs" opacity={0.6}>
-                    {description}
-                </Text>
-            </div>
-        </Group>
-    );
-}
-
-const SelectOptionComponent = () => {
-    const combobox = useCombobox({
-        onDropdownClose: () => {
-            combobox.resetSelectedOption();
-            close();
-        }
-    });
-
-    const [value, setValue] = useState<string | null>(null);
-    const selectedOption = data.find((item) => item.value === value);
-    const [opened, {open, close}] = useDisclosure(false);
-
-    const options = data.map((item) => (
-        <Combobox.Option value={item.value} key={item.value + item.description}>
-            <SelectOption {...item} />
-        </Combobox.Option>
-    ));
-
-    return (
-        <Combobox
-            store={combobox}
-            withinPortal={true}
-            onOptionSubmit={(val) => {
-                setValue(val);
-                close();
-                combobox.closeDropdown();
-            }}
-        >
-            <Combobox.Target>
-                <InputBase
-                    component="button"
-                    type="button"
-                    pointer
-                    rightSection={<Combobox.Chevron/>}
-                    onClick={() => {
-                        open();
-                        combobox.openDropdown();
-                    }}
-                    rightSectionPointerEvents="none"
-                    multiline
-                >
-                    {selectedOption ? (
-                        <SelectOption {...selectedOption} />
-                    ) : (
-                        <Input.Placeholder>Выбрать класс</Input.Placeholder>
-                    )}
-                </InputBase>
-            </Combobox.Target>
-            <Modal opened={opened}
-                   onClose={close}
-                   size={284}
-                   transitionProps={{transition: 'rotate-left'}}
-                   className="tablet-or-mobile"
-            >
-                <ScrollArea.Autosize type="scroll" mah={400}>
-                    {options}
-                </ScrollArea.Autosize>
-            </Modal>
-            <Combobox.Dropdown className="desktop">
-                <ScrollArea.Autosize type="scroll" mah={260}>
-                    {options}
-                </ScrollArea.Autosize>
-            </Combobox.Dropdown>
-        </Combobox>
-    );
-}
+import {SelectOptionComponent} from "@src/widgets/custom-select";
 
 
 const DayPicker = () => {
