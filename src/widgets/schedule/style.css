@@ -52,6 +52,33 @@
 .schedule__wrapper {
     padding: 10px 5px;
     @media screen and (min-width: 1081px) {
-        padding: 20px;
+        padding: 10px 20px 20px;
+    }
+    @media screen and (min-width: 350px){
+        padding: 10px;
+    }
+}
+
+.schedule-day {
+    & > div > div {
+        padding: 8px 6px;
+        border-bottom: 2px solid var(--mantine-color-gray-2);
+    }
+
+    & > div:last-child > div {
+        padding-right: 0;
+    }
+
+    & > div:first-child > div {
+        padding-left: 0;
+    }
+
+    & > div > div:first-child {
+        padding-top: 0;
+    }
+
+    & > div > div:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
     }
 }

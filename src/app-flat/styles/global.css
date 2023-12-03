@@ -14,6 +14,10 @@ body {
     font-family: "Segoe UI", sans-serif;
 }
 
+pre {
+    margin: 0;
+}
+
 .rounded {
     border-radius: 6px;
     background: #FFF;
@@ -89,4 +93,8 @@ body {
     .big {
         display: none;
     }
+}
+
+.hidden-scrollbar::-webkit-scrollbar {
+    display: none;
 }
