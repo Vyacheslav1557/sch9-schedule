@@ -20,7 +20,7 @@ type Cell = {
 
 const Cell = (data: (Cell & Subject)) => {
     return (
-        <Draggable draggableId={data.id} index={data.index}>
+        <Draggable draggableId={data.id} index={data.index} key={data.id}>
             {(provided) => (
                 <div
                     ref={provided.innerRef}
@@ -59,7 +59,7 @@ const Cell = (data: (Cell & Subject)) => {
 
 const EmptyCell = (data: (Cell & Gap)) => {
     return (
-        <Draggable draggableId={data.id} index={data.index}>
+        <Draggable draggableId={data.id} index={data.index} key={data.id}>
             {(provided) => (
                 <div
                     ref={provided.innerRef}
@@ -82,9 +82,9 @@ function isEmpty(sub: Subject | Gap): sub is Gap {
     return (sub as Subject).empty;
 }
 
-const DayW = (day: Day) => {
+const DayW = (day: (Day & {index: number})) => {
     return (
-        <Droppable droppableId={day.id}>
+        <Droppable droppableId={day.index.toString()}>
             {(provided) => (
                 <Stack gap={10} style={{
                     padding: "10px",
@@ -111,12 +111,25 @@ const DayW = (day: Day) => {
     )
 }
 
+const removeFromList = (list: SchoolSubject[], index: number): [SchoolSubject, SchoolSubject[]] => {
+    const result = Array.from(list);
+    const [removed] = result.splice(index, 1);
+    return [removed, result];
+};
+
+const addToList = (list: SchoolSubject[], index: number, element: SchoolSubject): SchoolSubject[] => {
+    const result = Array.from(list);
+    result.splice(index, 0, element);
+    return result;
+};
+
+
 const DNDSchedule = (props: { week: Day[] }) => {
 
     const [week, setWeek] = useState<Day[]>(props.week);
 
     const onDrugEnd = (result: DropResult): OnDragEndResponder | undefined => {
-        const {destination, source, draggableId} = result;
+        const {destination, source} = result;
 
         if (!destination)
             return;
@@ -124,45 +137,27 @@ const DNDSchedule = (props: { week: Day[] }) => {
         if (destination.droppableId === source.droppableId && destination.index === source.index)
             return;
 
-        const sourceColumnIndex = week.findIndex((day) => day.id === source.droppableId);
-        const sourceColumn = week[sourceColumnIndex];
-        if (!sourceColumn)
-            return;
+        const weekCopy: Day[] = JSON.parse(JSON.stringify(week));
+        const sourceList = weekCopy[+source.droppableId].subjects;
+        const [removedElement, newSourceList] = removeFromList(
+            sourceList,
+            source.index
+        );
+        weekCopy[+result.source.droppableId].subjects = newSourceList;
+        const destinationList = weekCopy[+destination.droppableId].subjects;
+        weekCopy[+destination.droppableId].subjects = addToList(
+            destinationList,
+            destination.index,
+            removedElement
+        );
 
-        const destinationColumnIndex = week.findIndex((day) => day.id === destination.droppableId);
-        const destinationColumn = week[destinationColumnIndex];
-        if (!destinationColumn)
-            return;
-
-        const movable = sourceColumn.subjects.find((sub) => sub.id === draggableId);
-        if (!movable)
-            return;
-
-
-        let newSourceSubjects = Array.from(sourceColumn.subjects);
-        let newDestinationSubjects = Array.from(destinationColumn.subjects);
-        if (source.droppableId == destination.droppableId) {
-            newDestinationSubjects.splice(source.index, 1);
-            if (source.index < destination.index) {
-                newDestinationSubjects.splice(destination.index - 1, 0, movable);
-            } else {
-                newDestinationSubjects.splice(destination.index, 0, movable);
-            }
-        } else {
-            newDestinationSubjects.splice(destination.index, 0, movable);
-            newSourceSubjects.splice(source.index, 1);
-        }
-
-        const newWeek = Array.from(week);
-        newWeek[sourceColumnIndex].subjects = newSourceSubjects;
-        newWeek[destinationColumnIndex].subjects = newDestinationSubjects;
-        setWeek(newWeek);
+        setWeek(weekCopy);
     }
 
     return (
         <DragDropContext onDragEnd={onDrugEnd}>
             <Group gap={0} align="flex-start">
-                {week.map((item) => <DayW {...item} key={item.id}/>)}
+                {week.map((day, index) => <DayW {...day} key={day.id} index={index}/>)}
             </Group>
         </DragDropContext>
     );
