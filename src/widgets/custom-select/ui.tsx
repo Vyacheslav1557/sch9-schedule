@@ -1,7 +1,7 @@
 import {Combobox, Group, Input, InputBase, Modal, ScrollArea, Text, useCombobox} from "@mantine/core";
 import React, {useState} from "react";
 import {useDisclosure} from "@mantine/hooks";
-import {ClassesData as data, Item} from "@src/shared/api";
+import {data, Item} from "@src/shared/api";
 
 const SelectOption = ({value, description}: Item) => {
     return (

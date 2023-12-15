@@ -1,5 +1,5 @@
 import {Table, TableTbody, TableTd, TableTr} from "@mantine/core";
-import {subjects} from "@src/shared/api/temporary/api";
+import {subjects} from "@src/shared/api/subjects/api";
 
 const ScheduleEdit = () => {
     const rows = subjects.map((subject, index) => (

@@ -1,13 +1,13 @@
 import {SideBar} from "@src/widgets/sidebar";
-import {ScheduleEdit} from "@src/widgets/schedule-edit";
+import {ServerDND} from "@src/widgets/edit";
 
 export default () => {
     return (
         <div className="wrapper">
             <main style={{width: "fit-content"}}>
-                <ScheduleEdit/>
+                <ServerDND/>
             </main>
-            <SideBar/>
+            {/*<SideBar/>*/}
         </div>
     );
 }

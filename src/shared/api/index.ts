@@ -1,1 +1,2 @@
-export * from "./temporary";
+export * from "./subjects";
+export * from "./classes";
