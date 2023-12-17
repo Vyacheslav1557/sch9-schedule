@@ -1,6 +1,6 @@
 'use client';
 
-import React, {useMemo, useState} from 'react';
+import React, {useState} from 'react';
 import {headers, Subject, Day, Gap, SchoolSubject} from "@src/shared/api";
 import {
     Draggable,
@@ -12,6 +12,12 @@ import {
 import {ActionIcon, Button, Group, Stack} from "@mantine/core";
 import {IconChevronLeft, IconChevronRight} from "@tabler/icons-react";
 import "./style.css";
+
+// TODO: нормально зарефакторить
+// TODO: интерфейс Cell
+// TODO: добавить календарь и выбор класса
+// TODO: время и дата
+// TODO: кнопка включения редактирования (управление через контекст)
 
 type Cell = {
     fullWidth?: boolean
@@ -26,6 +32,7 @@ const Cell = (data: (Cell & Subject)) => {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
+                    onClick={(e) => console.log("clicked")}
                 >
                     <div style={{
                         width: data.fullWidth ? "100%" : "120px",
