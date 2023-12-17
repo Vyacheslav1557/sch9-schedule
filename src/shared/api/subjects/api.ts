@@ -28,7 +28,7 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Русский язык',
-                color: 'var(--mantine-color-pink-9)',
+                color: 'var(--mantine-color-lime-5)',
             },
             {
                 empty: false,
@@ -80,7 +80,7 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Русский язык',
-                color: 'var(--mantine-color-pink-9)',
+                color: 'var(--mantine-color-lime-5)',
             },
             {
                 empty: true,

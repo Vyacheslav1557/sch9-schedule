@@ -1,25 +1,26 @@
-.mantine-Combobox-dropdown {
-    border-radius: 6px;
-}
-
-.mantine-Button-root, .mantine-InputBase-input {
-    height: 54px;
-}
-
-.mantine-InputBase-input {
-    border-radius: 6px;
-}
-
 .sidebar {
     display: flex;
     gap: calc(0.625rem * var(--mantine-scale));
     align-items: stretch;
     justify-content: flex-start;
     flex-direction: column;
+
     @media screen and (max-width: 1365px) {
         flex-direction: row;
         width: fit-content;
         align-self: flex-end;
         justify-content: space-around;
+    }
+
+    & :global(.mantine-Combobox-dropdown) {
+        border-radius: 6px;
+    }
+
+    & :global(.mantine-Button-root), & :global(.mantine-InputBase-input) {
+        height: 54px;
+    }
+
+    & :global(.mantine-InputBase-input) {
+        border-radius: 6px;
     }
 }

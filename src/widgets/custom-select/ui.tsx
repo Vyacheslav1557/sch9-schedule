@@ -66,17 +66,17 @@ export const SelectOptionComponent = () => {
                     )}
                 </InputBase>
             </Combobox.Target>
-            <Modal opened={opened}
-                   onClose={close}
-                   size={284}
-                   transitionProps={{transition: 'rotate-left'}}
-                   className="tablet-or-mobile"
-            >
-                <ScrollArea.Autosize type="scroll" mah={400}>
-                    {options}
-                </ScrollArea.Autosize>
-            </Modal>
-            <Combobox.Dropdown className="desktop">
+            {/*<Modal opened={opened}*/}
+            {/*       onClose={close}*/}
+            {/*       size={284}*/}
+            {/*       transitionProps={{transition: 'rotate-left'}}*/}
+            {/*       className="tablet-or-mobile"*/}
+            {/*>*/}
+            {/*    <ScrollArea.Autosize type="scroll" mah={400}>*/}
+            {/*        {options}*/}
+            {/*    </ScrollArea.Autosize>*/}
+            {/*</Modal>*/}
+            <Combobox.Dropdown>
                 <ScrollArea.Autosize type="scroll" mah={260}>
                     {options}
                 </ScrollArea.Autosize>

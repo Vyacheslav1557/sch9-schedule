@@ -8,11 +8,13 @@ export const metadata = {
     title: 'Schedule',
 };
 
-export default function RootLayout({children}: { children: any }) {
+export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <html lang="ru">
         <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+            {children}
+        </MantineProvider>
         </body>
         </html>
     );

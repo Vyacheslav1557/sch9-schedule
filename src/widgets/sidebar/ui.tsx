@@ -2,11 +2,12 @@
 import React, {useState} from 'react';
 import {Button, Modal} from "@mantine/core";
 import {WeekPicker} from "@src/widgets/week-picker";
-import "./style.css"
+import style from "./style.module.css"
 import {useDisclosure} from '@mantine/hooks';
 import {Calendar} from "@mantine/dates";
 import dayjs from "dayjs";
 import {SelectOptionComponent} from "@src/widgets/custom-select";
+import {Rounded} from "@src/shared/common";
 
 
 const DayPicker = () => {
@@ -33,30 +34,26 @@ const SideBar = () => {
     const [opened, {open, close}] = useDisclosure(false);
 
     return (
-        <aside className="sidebar">
-            <div className="desktop">
-                <div className="rounded" style={{padding: "10px"}}>
-                    <WeekPicker/>
-                </div>
-            </div>
-            <div className="desktop">
-                <SelectOptionComponent/>
-            </div>
-            <div className="tablet-or-mobile">
-                <Modal
-                    opened={opened}
-                    onClose={close}
-                    transitionProps={{transition: 'rotate-left'}}
-                    size="auto"
-                >
-                    <div className="small"><DayPicker/></div>
-                    <div className="big"><WeekPicker/></div>
-                </Modal>
-                <Button onClick={open} variant="default" radius={6}>Выбрать дату</Button>
-            </div>
-            <div className="tablet-or-mobile" style={{width: "180px"}}>
-                <SelectOptionComponent/>
-            </div>
+        <aside className={style.sidebar}>
+            <Rounded style={{padding: "10px"}}>
+                <WeekPicker/>
+            </Rounded>
+            <SelectOptionComponent/>
+            {/*<div className="tablet-or-mobile">*/}
+            {/*    <Modal*/}
+            {/*        opened={opened}*/}
+            {/*        onClose={close}*/}
+            {/*        transitionProps={{transition: 'rotate-left'}}*/}
+            {/*        size="auto"*/}
+            {/*    >*/}
+            {/*        <div className="small"><DayPicker/></div>*/}
+            {/*        <div className="big"><WeekPicker/></div>*/}
+            {/*    </Modal>*/}
+            {/*    <Button onClick={open} variant="default" radius={6}>Выбрать дату</Button>*/}
+            {/*</div>*/}
+            {/*<div className="tablet-or-mobile" style={{width: "180px"}}>*/}
+            {/*    <SelectOptionComponent/>*/}
+            {/*</div>*/}
         </aside>
     );
 };

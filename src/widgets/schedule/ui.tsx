@@ -1,188 +1,268 @@
-import React from 'react';
-import {Stack, Group, Button, ActionIcon} from "@mantine/core";
-import "./style.css"
-import {IconChevronLeft, IconChevronRight, IconClock} from "@tabler/icons-react";
-import {time, week, headers, Day, EmptySubject, Subject} from "@src/shared/api";
+'use client';
 
-interface ICell {
-    text: string
-    color?: string
+import React, {useState} from 'react';
+import {ActionIcon, Button, Group, Stack} from "@mantine/core";
+import style from "./style.module.css"
+import {IconChevronLeft, IconChevronRight} from "@tabler/icons-react";
+import {Day, Gap, headers, SchoolSubject, Subject, time} from "@src/shared/api";
+import {DragDropContext, Draggable, Droppable, DropResult, OnDragEndResponder} from "@hello-pangea/dnd";
+import {Rounded} from "@src/shared/common";
+
+
+// TODO: нормально зарефакторить
+// TODO: интерфейс Cell
+// TODO: добавить календарь и выбор класса
+// TODO: время и дата
+// TODO: кнопка включения редактирования (управление через контекст)
+
+
+type Cell = {
     fullWidth?: boolean
+    index: number
 }
 
-const Cell = ({text, color, fullWidth}: ICell) => {
+// <div
+//     style={{
+//         backgroundColor: "red",
+//         width: data.fullWidth ? "100%" : "120px"
+//     }}
+//     ref={provided.innerRef}
+//     className={style.cell}
+//     {...provided.draggableProps}
+//     {...provided.dragHandleProps}
+// >
+//     <Stack className={style.cell__content}>
+//         <span className={style.cell__title}>{data.title}</span>
+
+//     </Stack>
+// </div>
+
+
+// <div
+//     ref={provided.innerRef}
+//     {...provided.draggableProps}
+//     {...provided.dragHandleProps}
+//     className={style.cell}
+
+// >
+
+// </div>
+
+//     <div
+//         style={{backgroundColor: "green"}}
+//         className={style.cell}
+//     >
+//     </div>
+
+const Cell = (data: (Cell & Subject)) => {
     return (
-        <div>
-            <div style={{
-                width: fullWidth ? "100%" : "120px",
-                height: "60px",
-                backgroundColor: color,
-                borderRadius: "6px 10px 10px 6px",
-                paddingLeft: "6px"
-            }}>
-                <Stack style={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "0 6px 6px 0",
-                    backgroundColor: "#E9EFFF",
-                    padding: "6px",
-                    justifyContent: "space-evenly",
-                    gap: "0px"
-                }}>
-                    <span className="cell">{text}</span>
-                    {/*<Group style={{fontSize: "10px", justifyContent: "flex-start", gap: "4px"}}>*/}
-                    {/*    <IconClock size="14px"/>*/}
-                    {/*    <span>9:00-12:00</span>*/}
-                    {/*</Group>*/}
-                </Stack>
-            </div>
-        </div>
+        <Draggable draggableId={data.id} index={data.index} key={data.id}>
+            {(provided) => (
+                <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                >
+                    <div
+                        className={style.cell}
+                        style={{
+                            backgroundColor: data.color,
+                            width: data.fullWidth ? "100%" : "120px"
+                        }}
+                    >
+                        <Stack className={style.cell__content}>
+                            <span className={style.cell__title}>{data.title}</span>
+                            {/*    <Group style={{fontSize: "10px", justifyContent: "flex-start", gap: "4px"}}>*/}
+                            {/*        <IconClock size="14px"/>*/}
+                            {/*        <span>9:00-12:00</span>*/}
+                            {/*    </Group>*/}
+                        </Stack>
+                    </div>
+                </div>
+            )
+            }
+        </Draggable>
     );
 }
 
-
-const WeekNav = () => {
+const EmptyCell = (data: (Cell & Gap)) => {
     return (
-        <div style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-            gap: "4px"
-        }}>
-            <ActionIcon className="day" size={36} px={0}><IconChevronLeft/></ActionIcon>
-            <div style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-around",
-                gap: "2px"
-            }}>
-                {headers.map((item, index) => (
-                    <div style={{
-                        fontWeight: 600,
-                        display: "inline",
-                        borderRadius: "6px",
-                        textAlign: "center",
-                    }} key={index}>
-                        <Button className={index === 0 ? "day-selected" : "day"}>
-                            <pre style={{margin: 0}}>{item}</pre>
-                        </Button>
-                    </div>
-                ))}
-            </div>
-            <ActionIcon className="day" size={36} px={0}><IconChevronRight/></ActionIcon>
-        </div>
-    )
-}
-
-const EmptyCell = () => {
-    return (
-        <div>
-            <div style={{
-                width: "120px",
-                height: "60px",
-                backgroundColor: "transparent"
-            }}/>
-        </div>
-    )
-}
-
-function isEmpty(sub: Subject | EmptySubject): sub is EmptySubject {
-    return (sub as Subject).name === undefined;
-}
-
-const Day = (day: Day & {fullWidth?:boolean}) => {
-    return (
-        <Stack gap={0} style={{
-            width: day.fullWidth ? "calc(100% - 50px)" : ""
-        }}>
-            {day.subjects.map((item, index) => {
-                    return (
-                        isEmpty(item) ?
-                            <EmptyCell key={index}/>
-                            :
-                            <Cell key={index} text={item.name} color={item.color} fullWidth={day.fullWidth}/>
-                    )
-                }
+        <Draggable draggableId={data.id} index={data.index} key={data.id}>
+            {(provided) => (
+                <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    className={style.cell__empty}
+                />
             )
             }
-        </Stack>
+        </Draggable>
     )
 }
+//
+const isEmpty = (sub: Subject | Gap): sub is Gap => {
+    return (sub as Subject).empty;
+}
+
+// const WeekNav = () => {
+//     return (
+//         <div style={{
+//             display: "flex",
+//             flexDirection: "row",
+//             justifyContent: "space-evenly",
+//             alignItems: "center",
+//             gap: "4px"
+//         }}>
+//             <ActionIcon className="day" size={36} px={0}><IconChevronLeft/></ActionIcon>
+//             <div style={{
+//                 display: "flex",
+//                 flexDirection: "row",
+//                 justifyContent: "space-around",
+//                 gap: "2px"
+//             }}>
+//                 {headers.map((item, index) => (
+//                     <div style={{
+//                         fontWeight: 600,
+//                         display: "inline",
+//                         borderRadius: "6px",
+//                         textAlign: "center",
+//                     }} key={index}>
+//                         <Button className={index === 0 ? "day-selected" : "day"}>
+//                             <pre style={{margin: 0}}>{item}</pre>
+//                         </Button>
+//                     </div>
+//                 ))}
+//             </div>
+//             <ActionIcon className="day" size={36} px={0}><IconChevronRight/></ActionIcon>
+//         </div>
+//     )
+// }
+
+
+const DayW = (day: (Day & { index: number })) => {
+    return (
+        <Droppable droppableId={day.index.toString()}>
+            {(provided) => (
+                <Stack gap={10}
+                       style={{padding: "0 6px", borderRadius: "10px"}}
+                       {...provided.droppableProps}
+                       ref={provided.innerRef}
+                >
+                    {day.subjects.map((item, index) => (
+                            isEmpty(item) ?
+                                <EmptyCell key={index}
+                                           {...item}
+                                           index={index}/>
+                                :
+                                <Cell key={index}
+                                      {...item}
+                                      index={index}/>
+                        )
+                    )
+                    }
+                    {provided.placeholder}
+                </Stack>
+            )}
+        </Droppable>
+    )
+}
+
+const removeFromList = (list: SchoolSubject[], index: number): [SchoolSubject, SchoolSubject[]] => {
+    const result = Array.from(list);
+    const [removed] = result.splice(index, 1);
+    return [removed, result];
+};
+
+const addToList = (list: SchoolSubject[], index: number, element: SchoolSubject): SchoolSubject[] => {
+    const result = Array.from(list);
+    result.splice(index, 0, element);
+    return result;
+};
+
+
+const DNDSchedule = (props: { week: Day[] }) => {
+    const [week, setWeek] = useState<Day[]>(props.week);
+
+    const onDrugEnd = (result: DropResult): OnDragEndResponder | undefined => {
+        const {destination, source} = result;
+
+        if (!destination)
+            return;
+
+        if (destination.droppableId === source.droppableId && destination.index === source.index)
+            return;
+
+        const weekCopy: Day[] = JSON.parse(JSON.stringify(week));
+        const sourceList = weekCopy[+source.droppableId].subjects;
+        const [removedElement, newSourceList] = removeFromList(
+            sourceList,
+            source.index
+        );
+        weekCopy[+result.source.droppableId].subjects = newSourceList;
+        const destinationList = weekCopy[+destination.droppableId].subjects;
+        weekCopy[+destination.droppableId].subjects = addToList(
+            destinationList,
+            destination.index,
+            removedElement
+        );
+
+        setWeek(weekCopy);
+    }
+
+    return (
+        <DragDropContext onDragEnd={onDrugEnd}>
+            <Group gap="0" align="flex-start">
+                {week.map((day, index) => <DayW {...day} key={day.id} index={index}/>)}
+            </Group>
+        </DragDropContext>
+    );
+};
 
 const TimeCol = () => {
     return (
-        <Stack style={{
-            height: "100%",
-            gap: 0,
-            justifyContent: "space-around"
-        }}>
+        <Stack h="100%" justify="space-around" pr="6px" gap="10px">
             {time.map((item, index) => (
                 <div key={index}>
-                    <div style={{
-                        height: "60px",
-                        textAlign: "center",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center"
-                    }}>
+                    <Stack h="60px" justify="center" style={{textAlign: "center"}}>
                         <pre>{item}</pre>
-                    </div>
+                    </Stack>
                 </div>
             ))}
         </Stack>
     )
 }
 
-const Schedule = () => {
+const Schedule = (props: { week: Day[] }) => {
+    const [week, _] = useState(props.week);
+
     return (
-        <div className="rounded schedule__wrapper" style={{
-            fontWeight: 500,
-        }}>
-            <Stack className="small">
-                <WeekNav/>
-                <Group className="schedule-day" gap={0}>
-                    <TimeCol/>
-                    <Day date={week[0].date} subjects={week[0].subjects} fullWidth/>
-                </Group>
-            </Stack>
-            <Group gap={12} className="big">
-                <div>
-                    <div style={{
-                        height: "60px",
-                        textAlign: "center",
-                        display: "flex",
-                        width: "40px",
-                        flexDirection: "column",
-                        justifyContent: "center"
-                    }}>
-                        <pre/>
+        <Rounded className={style.schedule__wrapper} style={{fontWeight: 500}}>
+            {/*<Stack className="small">*/}
+            {/*    <WeekNav/>*/}
+            {/*    <Group className="schedule-day" gap={0}>*/}
+            {/*        <TimeCol/>*/}
+            {/*        <DayW date={week[0].date} subjects={week[0].subjects} fullWidth/>*/}
+            {/*    </Group>*/}
+            {/*</Stack>*/}
+            <Group gap="12px">
+                <div style={{height: "60px", width: "40px"}}/>
+                {week.map((day, index) => (
+                    <div key={index}
+                         style={{
+                             width: "120px",
+                             height: "60px",
+                             textAlign: "center"
+                         }}>
+                        <pre>{day.date}</pre>
                     </div>
-                </div>
-                {
-                    week.map((item, index) => (
-                        <div key={index}>
-                            <div style={{
-                                width: "120px",
-                                height: "60px",
-                                textAlign: "center"
-                            }}>
-                                <pre>{item.date}</pre>
-                            </div>
-                        </div>
-                    ))
-                }
-            </Group>
-            <Group style={{
-                gap: 0,
-                alignItems: "flex-start"
-            }} className="schedule-day big">
-                <TimeCol/>
-                {week.map((item, index) => (
-                    <Day key={index} subjects={item.subjects} date={item.date}/>
                 ))}
             </Group>
-        </div>
+            <Group gap="0" style={{alignItems: "flex-start"}} className={style.schedule__main}>
+                <TimeCol/>
+                <DNDSchedule week={week}/>
+            </Group>
+        </Rounded>
     );
 };
 
