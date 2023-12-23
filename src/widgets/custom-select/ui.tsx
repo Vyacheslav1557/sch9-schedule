@@ -1,4 +1,4 @@
-import {Combobox, Group, Input, InputBase, Modal, ScrollArea, Text, useCombobox} from "@mantine/core";
+import {Combobox, Group, Input, InputBase, ScrollArea, Text, useCombobox} from "@mantine/core";
 import React, {useState} from "react";
 import {useDisclosure} from "@mantine/hooks";
 import {data, Item} from "@src/shared/api";

@@ -1,0 +1,13 @@
+.wrapper {
+    padding: 20px;
+    width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 10px 0;
+}

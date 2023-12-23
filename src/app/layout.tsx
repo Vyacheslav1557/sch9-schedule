@@ -8,7 +8,13 @@ export const metadata = {
     title: 'Schedule',
 };
 
-export default function RootLayout({children}: { children: React.ReactNode }) {
+type Props = {
+    children: React.ReactNode
+}
+
+// TODO: заменить html, body на AppShell
+
+export default ({children}: Props) => {
     return (
         <html lang="ru">
         <body>

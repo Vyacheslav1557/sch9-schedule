@@ -1,1 +1,1 @@
-export {Schedule} from "./ui"
+export * from "./week";

@@ -1,6 +1,5 @@
 'use client';
 import React, {useState} from 'react';
-import {Button, Modal} from "@mantine/core";
 import {WeekPicker} from "@src/widgets/week-picker";
 import style from "./style.module.css"
 import {useDisclosure} from '@mantine/hooks';

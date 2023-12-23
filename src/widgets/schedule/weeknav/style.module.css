@@ -1,0 +1,17 @@
+.day {
+    padding: 8px;
+    background-color: var(--mantine-color-white);
+
+    &:hover {
+        background-color: var(--mantine-color-gray-1);
+    }
+}
+
+.selected {
+    padding: 8px;
+    background-color: var(--mantine-color-blue-2);
+
+    &:hover {
+        background-color: var(--mantine-color-blue-3);
+    }
+}
