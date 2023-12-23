@@ -3,7 +3,7 @@ import {Group, Stack} from "@mantine/core";
 import style from "./common/style.module.css"
 import {Day, time} from "@src/shared/api";
 import {Rounded} from "@src/shared/common";
-import {DroppableSchedule} from "@src/widgets/schedule/week/draggable/ui";
+import {DroppableSchedule} from "@src/widgets/schedule/week/droppable/ui";
 import {SimpleSchedule} from "@src/widgets/schedule/week/simple/ui";
 
 

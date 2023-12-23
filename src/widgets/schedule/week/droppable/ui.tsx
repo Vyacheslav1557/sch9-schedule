@@ -3,7 +3,7 @@
 import {Day} from "@src/shared/api";
 import React, {useState} from "react";
 import {DragDropContext, DropResult, OnDragEndResponder} from "@hello-pangea/dnd";
-import {addToList, removeFromList} from "@src/widgets/schedule/week/draggable/lib";
+import {addToList, removeFromList} from "@src/widgets/schedule/week/droppable/lib";
 import {Group} from "@mantine/core";
 import {DroppableDay} from "@src/widgets/schedule/day";
 
@@ -39,7 +39,7 @@ const DroppableSchedule = (props: { week: Day[] }) => {
     return (
         <DragDropContext onDragEnd={onDrugEnd}>
             <Group gap="0" align="flex-start">
-                {props.week.map((day, index) => <DroppableDay {...day} key={day.id} index={index}/>)}
+                {week.map((day, index) => <DroppableDay {...day} key={day.id} index={index}/>)}
             </Group>
         </DragDropContext>
     );

@@ -1,4 +1,5 @@
 'use client';
+
 import React, {useState} from 'react';
 import {WeekPicker} from "@src/widgets/week-picker";
 import style from "./style.module.css"
