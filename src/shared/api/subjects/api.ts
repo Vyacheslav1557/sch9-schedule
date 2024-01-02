@@ -10,37 +10,37 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Классные часы "Разговоры о важном"',
-                color: 'var(--mantine-color-red-5)',
+                color: '#FF6B6B',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Физика',
-                color: 'var(--mantine-color-red-9)',
+                color: '#C92A2A',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Алгебра и начала математического анализа',
-                color: 'var(--mantine-color-pink-5)',
+                color: '#F06595',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Русский язык',
-                color: 'var(--mantine-color-lime-5)',
+                color: '#94D82D',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Литература',
-                color: 'var(--mantine-color-grape-5)',
+                color: '#CC5DE8',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Физика',
-                color: 'var(--mantine-color-red-9)',
+                color: '#C92A2A',
             },
         ]
     },
@@ -52,13 +52,13 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Литература',
-                color: 'var(--mantine-color-grape-5)',
+                color: '#CC5DE8',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Литература',
-                color: 'var(--mantine-color-grape-5)',
+                color: '#CC5DE8',
             },
             {
                 empty: true,
@@ -68,7 +68,7 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Геометрия',
-                color: 'var(--mantine-color-grape-9)',
+                color: '#862E9C',
             },
         ]
     },
@@ -80,7 +80,7 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Русский язык',
-                color: 'var(--mantine-color-lime-5)',
+                color: '#94D82D',
             },
             {
                 empty: true,
@@ -94,19 +94,19 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Алгебра и начала математического анализа',
-                color: 'var(--mantine-color-pink-5)',
+                color: '#F06595',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Алгебра и начала математического анализа',
-                color: 'var(--mantine-color-pink-5)',
+                color: '#F06595',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Физическая культура',
-                color: 'var(--mantine-color-violet-5)',
+                color: '#845EF7',
             },
         ]
     },
@@ -118,37 +118,37 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Алгебра и начала математического анализа',
-                color: 'var(--mantine-color-pink-5)',
+                color: '#F06595',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Физика',
-                color: 'var(--mantine-color-red-9)',
+                color: '#C92A2A',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Физическая культура',
-                color: 'var(--mantine-color-violet-5)',
+                color: '#845EF7',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Физика',
-                color: 'var(--mantine-color-red-9)',
+                color: '#C92A2A',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'География',
-                color: 'var(--mantine-color-violet-9)',
+                color: '#5F3DC4',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Английский язык',
-                color: 'var(--mantine-color-indigo-5)',
+                color: '#5C7CFA',
             },
         ]
     },
@@ -161,25 +161,25 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Геометрия',
-                color: 'var(--mantine-color-grape-9)',
+                color: '#862E9C',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Геометрия',
-                color: 'var(--mantine-color-grape-9)',
+                color: '#862E9C',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Английский язык',
-                color: 'var(--mantine-color-indigo-5)',
+                color: '#5C7CFA',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Физика',
-                color: 'var(--mantine-color-red-9)',
+                color: '#C92A2A',
             },
         ]
     },
@@ -191,36 +191,58 @@ const week: Day[] = [
                 empty: false,
                 id: uuidv4(),
                 title: 'Химия',
-                color: 'var(--mantine-color-indigo-9)',
+                color: '#364FC7',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Биология',
-                color: 'var(--mantine-color-blue-5)',
+                color: '#339AF0',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Вероятность и статистика',
-                color: 'var(--mantine-color-teal-5)',
+                color: '#20C997',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Английский язык',
-                color: 'var(--mantine-color-indigo-5)',
+                color: '#5C7CFA',
             },
             {
                 empty: false,
                 id: uuidv4(),
                 title: 'Алгебра и начала математического анализа',
-                color: 'var(--mantine-color-pink-5)',
+                color: '#F06595',
             },
         ]
     },
 ]
 
+type Temp = {
+    title: string,
+    color: string
+}
+
+let subjects: Temp[] = [];
+for (const day of week) {
+    for (const subject of day.subjects) {
+        if (!subject.empty) {
+            subjects.push({
+                title: subject.title,
+                color: subject.color
+            })
+        }
+    }
+}
+
+const onlyUnique = (value: Temp, index: number, array: Temp[]) => {
+    return array.findIndex((item) => item.title == value.title) === index;
+}
+
+const uniqueSubjects = subjects.filter(onlyUnique);
 
 // TODO: get rid of headers array
 const headers = [
@@ -245,4 +267,5 @@ const time = [
     "13:35\n14:15",
 ]
 
-export {week, time, headers};
+export {week, time, headers, uniqueSubjects};
+export type {Temp};

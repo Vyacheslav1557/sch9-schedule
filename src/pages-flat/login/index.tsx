@@ -1,6 +1,6 @@
 'use client';
 
-import {Button, PasswordInput, TextInput,} from '@mantine/core';
+import {Button, Group, PasswordInput, TextInput,} from '@mantine/core';
 import {Rounded} from "@src/shared/common";
 import {useRouter} from "next/navigation";
 import {useForm} from "@mantine/form";
@@ -31,9 +31,14 @@ export default () => {
                 <TextInput label="Логин" placeholder="moderator4517" required {...form.getInputProps('login')}/>
                 <PasswordInput label="Пароль" placeholder="password" required
                                mt="md" {...form.getInputProps('password')}/>
-                <Button type="submit" fullWidth mt="md" onClick={router.back} disabled={!form.isValid()}>
-                    Войти
-                </Button>
+                <Group mt="md">
+                    <Button onClick={router.back} w="100%" style={{flex: 1}}>
+                        Назад
+                    </Button>
+                    <Button type="submit" onClick={router.back} disabled={!form.isValid()} style={{flex: 1}}>
+                        Войти
+                    </Button>
+                </Group>
             </Rounded>
         </div>
     );

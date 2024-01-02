@@ -1,11 +1,14 @@
 import {SchoolSubject} from "@src/shared/api";
-import {Cell} from "@src/widgets/schedule/cell";
-import {isEmpty} from "@src/widgets/schedule/cell/common/lib";
-import style from "@src/widgets/schedule/cell/common/style.module.css";
+import {Cell} from "./types";
+import {isEmpty} from "@src/widgets/schedule/cell/lib";
+import style from "./style.module.css";
 import {Stack} from "@mantine/core";
 import React from "react";
 
-const SubjectCell = ({data, cell}: { data: SchoolSubject, cell: Cell }) => {
+const SubjectCell = ({data, cell}: {
+    data: SchoolSubject,
+    cell: Cell
+}) => {
     return (
         isEmpty(data) ?
             <div className={style.cell__empty}/>

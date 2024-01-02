@@ -1,1 +1,1 @@
-export {Schedule} from "./ui";
+export {ScheduleView, ScheduleEdit} from "./ui";

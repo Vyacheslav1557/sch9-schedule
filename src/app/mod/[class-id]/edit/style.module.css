@@ -1,3 +1,9 @@
+.wrapper {
+    width: 1200px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
 .cell {
     width: 120px;
     height: 60px;
@@ -5,6 +11,16 @@
     padding-left: 6px;
     box-shadow: 0 4px 8px 0 rgba(34, 60, 80, 0.14);
     border: 1px solid var(--mantine-color-dark-4);
+    transition: all 0.2s ease-in;
+    cursor: pointer;
+
+    margin: auto;
+}
+
+.chosen {
+    width: 140px;
+    padding-left: 8px;
+    height: 70px;
 }
 
 .cell__content {
@@ -24,13 +40,20 @@
     overflow: hidden;
 }
 
-.cell__empty {
+.new {
     width: 120px;
     height: 60px;
-    background: url("/kartinki-nebo-8.jpg") no-repeat;
-    background-size: 100%;
-    border-radius: 6px;
-    box-shadow: 0 4px 8px 0 rgba(34, 60, 80, 0.14);
+    background-color: var(--mantine-color-blue-4);
+    margin: auto;
+    border-radius: 6px 7px 7px 6px;
     border: 1px solid var(--mantine-color-dark-4);
+    cursor: pointer;
 }
 
+.plus{
+    width: 60px;
+    height: 60px;
+    color: white;
+    margin: auto;
+    display: block;
+}

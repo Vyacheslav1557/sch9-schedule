@@ -1,0 +1,35 @@
+.cell {
+    width: 120px;
+    height: 60px;
+    border-radius: 6px 7px 7px 6px;
+    padding-left: 6px;
+    box-shadow: 0 4px 8px 0 rgba(34, 60, 80, 0.14);
+    border: 1px solid var(--mantine-color-dark-4);
+}
+
+.cell__content {
+    width: 100%;
+    height: 100%;
+    border-radius: 0 6px 6px 0;
+    background-color: var(--mantine-color-white);
+    padding: 4px 6px 6px;
+    justify-content: space-evenly;
+    gap: 0;
+}
+
+.cell__title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cell__empty {
+    width: 120px;
+    height: 60px;
+    background: url("/kartinki-nebo-8.jpg") no-repeat;
+    background-size: 100%;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px 0 rgba(34, 60, 80, 0.14);
+    border: 1px solid var(--mantine-color-dark-4);
+}

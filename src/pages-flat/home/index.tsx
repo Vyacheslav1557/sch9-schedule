@@ -23,7 +23,18 @@ export default () => {
                         смотреть расписание
                     </Button>
                 </div>
-
+                <br/>
+                <div>
+                    <Button onClick={() => router.push("/mod/1/edit/day/1")}>
+                        редактировать расписание
+                    </Button>
+                </div>
+                <br/>
+                <div>
+                    <Button onClick={() => router.push("/mod/1/edit")}>
+                        редактировать свойства класса
+                    </Button>
+                </div>
             </main>
         </div>
     )

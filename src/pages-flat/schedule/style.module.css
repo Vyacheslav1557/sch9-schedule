@@ -1,0 +1,16 @@
+
+
+.wrapper {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    @media screen and (max-width: 1365px) {
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        align-items: center;
+        width: fit-content;
+        margin: 0 auto;
+        padding: 10px;
+    }
+}

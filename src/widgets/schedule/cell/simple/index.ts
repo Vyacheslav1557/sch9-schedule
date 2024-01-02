@@ -1,1 +1,0 @@
-export {SubjectCell} from "./ui";
