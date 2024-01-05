@@ -1,6 +1,6 @@
 type Item = {
+    id: string;
     value: string;
-    description: string;
 }
 
 export type {Item};

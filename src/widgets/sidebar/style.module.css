@@ -1,6 +1,6 @@
 .sidebar {
     display: flex;
-    gap: calc(0.625rem * var(--mantine-scale));
+    gap: 10px;
     align-items: stretch;
     justify-content: flex-start;
     flex-direction: column;
@@ -11,16 +11,13 @@
         align-self: flex-end;
         justify-content: space-around;
     }
+}
 
-    & :global(.mantine-Combobox-dropdown) {
-        border-radius: 6px;
-    }
+.dropdown {
+    border-radius: 6px;
+}
 
-    & :global(.mantine-Button-root), & :global(.mantine-InputBase-input) {
-        height: 54px;
-    }
-
-    & :global(.mantine-InputBase-input) {
-        border-radius: 6px;
-    }
+.input {
+    height: 54px;
+    border-radius: 6px;
 }

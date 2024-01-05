@@ -1,16 +1,13 @@
-'use client';
-
 import {Button} from "@mantine/core";
-import {useRouter} from "next/navigation";
 import style from "./style.module.css";
+import Link from "next/link";
 
 export default () => {
-    const router = useRouter();
-
     return (
         <div className={style.wrapper}>
             <header className={style.header}>
-                <Button onClick={() => router.push("/login")}
+                <Button component={Link}
+                        href="/login"
                         variant="gradient"
                         gradient={{from: 'blue', to: 'teal', deg: 90}}
                 >
@@ -19,20 +16,26 @@ export default () => {
             </header>
             <main>
                 <div>
-                    <Button onClick={() => router.push("/schedule/1/1")}>
+                    <Button component={Link} href="/schedule">
                         смотреть расписание
                     </Button>
                 </div>
                 <br/>
                 <div>
-                    <Button onClick={() => router.push("/mod/1/edit/day/1")}>
+                    <Button component={Link} href="/mod/day/edit">
                         редактировать расписание
                     </Button>
                 </div>
                 <br/>
                 <div>
-                    <Button onClick={() => router.push("/mod/1/edit")}>
+                    <Button component={Link} href="/mod/day">
                         редактировать свойства класса
+                    </Button>
+                </div>
+                <br/>
+                <div>
+                    <Button component={Link} href="admin/class">
+                        редактировать список классов
                     </Button>
                 </div>
             </main>

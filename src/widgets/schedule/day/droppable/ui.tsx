@@ -5,7 +5,7 @@ import {Draggable, Droppable} from "@hello-pangea/dnd";
 import {Modal, SimpleGrid, Stack} from "@mantine/core";
 import {SubjectCell} from "@src/widgets/schedule/cell";
 import React from "react";
-import style from "@src/app/mod/[class-id]/edit/style.module.css";
+import style from "@src/pages-flat/class-edit/style.module.css";
 import {IconPlus} from "@tabler/icons-react";
 import {useDisclosure} from "@mantine/hooks";
 import {uniqueSubjects} from "@src/shared/api/subjects/api";
@@ -25,11 +25,14 @@ const AddNewSubject = (props: { onClick: any }) => {
                 }}>
                     {uniqueSubjects.map((item, index) => (
                         <div key={index}
-                             onClick={() => {props.onClick({
-                                 color: item.color,
-                                 empty: false,
-                                 title: item.title
-                             }); close()}}
+                             onClick={() => {
+                                 props.onClick({
+                                     color: item.color,
+                                     empty: false,
+                                     title: item.title
+                                 });
+                                 close()
+                             }}
                              className={style2.cell}
                         >
                             <SubjectCell
@@ -46,7 +49,10 @@ const AddNewSubject = (props: { onClick: any }) => {
                             />
                         </div>
                     ))}
-                    <div onClick={() => {props.onClick({empty: true}); close()}} className={style2.cell}>
+                    <div onClick={() => {
+                        props.onClick({empty: true});
+                        close()
+                    }} className={style2.cell}>
                         <SubjectCell data={{empty: true, id: ""}}
                                      cell={{index: -1, fullWidth: false}}
                         />
@@ -72,7 +78,7 @@ const DroppableDay = (props: { day: Day, onClick: any, onCellClick: any }) => {
                                     <div ref={provided.innerRef}
                                          {...provided.draggableProps}
                                          {...provided.dragHandleProps}
-                                        onClick={() => props.onCellClick(item.id)}
+                                         onClick={() => props.onCellClick(item.id)}
                                     >
                                         <SubjectCell data={item}
                                                      cell={{index, fullWidth: false}}

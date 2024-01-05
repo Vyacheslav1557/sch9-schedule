@@ -58,6 +58,10 @@ const ScheduleEdit = (props: { day: Day }) => {
         const subject = day.subjects.find((item) => item.id === id)
         if (!subject)
             return;
+        if (chosen?.id === id){
+            setChosen(null);
+            return;
+        }
 
         setChosen(subject);
     }
@@ -111,14 +115,6 @@ const ScheduleEdit = (props: { day: Day }) => {
                             </>
                             :
                             <></>}
-                        <Group>
-                            <Button variant="filled" color="red" style={{flex: 1}}>
-                                Отменить
-                            </Button>
-                            <Button style={{flex: 1}}>
-                                Сохранить
-                            </Button>
-                        </Group>
                     </Stack>
                     :
                     <></>

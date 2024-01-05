@@ -1,38 +1,38 @@
-import {Combobox, Group, Input, InputBase, ScrollArea, Text, useCombobox} from "@mantine/core";
-import React, {useState} from "react";
-import {useDisclosure} from "@mantine/hooks";
-import {data, Item} from "@src/shared/api";
+'use client';
 
-const SelectOption = ({value, description}: Item) => {
-    return (
-        <Group>
-            <div>
-                <Text fz="sm" fw={500}>
-                    {value}
-                </Text>
-                <Text fz="xs" opacity={0.6}>
-                    {description}
-                </Text>
-            </div>
-        </Group>
-    );
+import React, {useState} from "react";
+import {
+    ClassNames,
+    Combobox,
+    ComboboxFactory,
+    Input,
+    InputBase,
+    InputBaseFactory,
+    ScrollArea,
+    Text,
+    useCombobox
+} from "@mantine/core";
+import {data} from "@src/shared/api";
+
+type Props = {
+    classNames?: ClassNames<ComboboxFactory>
+    targetClassNames?: ClassNames<InputBaseFactory>
 }
 
-export const SelectOptionComponent = () => {
+export const SelectOptionComponent: React.FC<Props> = props => {
     const combobox = useCombobox({
-        onDropdownClose: () => {
-            combobox.resetSelectedOption();
-            close();
-        }
+        onDropdownClose: () => combobox.resetSelectedOption()
     });
 
     const [value, setValue] = useState<string | null>(null);
+
     const selectedOption = data.find((item) => item.value === value);
-    const [opened, {open, close}] = useDisclosure(false);
 
     const options = data.map((item) => (
-        <Combobox.Option value={item.value} key={item.value + item.description}>
-            <SelectOption {...item} />
+        <Combobox.Option value={item.value} key={item.id}>
+            <Text fz="sm" fw={500}>
+                {item.value}
+            </Text>
         </Combobox.Option>
     ));
 
@@ -42,9 +42,9 @@ export const SelectOptionComponent = () => {
             withinPortal={true}
             onOptionSubmit={(val) => {
                 setValue(val);
-                close();
                 combobox.closeDropdown();
             }}
+            classNames={props.classNames}
         >
             <Combobox.Target>
                 <InputBase
@@ -52,30 +52,20 @@ export const SelectOptionComponent = () => {
                     type="button"
                     pointer
                     rightSection={<Combobox.Chevron/>}
-                    onClick={() => {
-                        open();
-                        combobox.openDropdown();
-                    }}
+                    onClick={() => combobox.toggleDropdown()}
                     rightSectionPointerEvents="none"
                     multiline
+                    classNames={props.targetClassNames}
                 >
-                    {selectedOption ? (
-                        <SelectOption {...selectedOption} />
-                    ) : (
+                    {selectedOption ?
+                        <Text fz="sm" fw={500}>
+                            {selectedOption.value}
+                        </Text>
+                        :
                         <Input.Placeholder>Выбрать класс</Input.Placeholder>
-                    )}
+                    }
                 </InputBase>
             </Combobox.Target>
-            {/*<Modal opened={opened}*/}
-            {/*       onClose={close}*/}
-            {/*       size={284}*/}
-            {/*       transitionProps={{transition: 'rotate-left'}}*/}
-            {/*       className="tablet-or-mobile"*/}
-            {/*>*/}
-            {/*    <ScrollArea.Autosize type="scroll" mah={400}>*/}
-            {/*        {options}*/}
-            {/*    </ScrollArea.Autosize>*/}
-            {/*</Modal>*/}
             <Combobox.Dropdown>
                 <ScrollArea.Autosize type="scroll" mah={260}>
                     {options}

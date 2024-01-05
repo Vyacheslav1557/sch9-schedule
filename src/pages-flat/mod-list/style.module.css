@@ -1,0 +1,10 @@
+.wrapper {
+    padding: 20px;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.main {
+    padding: 10px;
+    width: 400px;
+}

@@ -1,44 +1,25 @@
-'use client';
-
-import React, {useState} from 'react';
+import React from 'react';
 import {WeekPicker} from "@src/widgets/week-picker";
 import style from "./style.module.css"
-import {useDisclosure} from '@mantine/hooks';
-import {Calendar} from "@mantine/dates";
-import dayjs from "dayjs";
 import {SelectOptionComponent} from "@src/widgets/custom-select";
 import {Rounded} from "@src/shared/common";
 
-
-const DayPicker = () => {
-    const [selected, setSelected] = useState<Date>();
-    const handleSelect = (date: Date) => {
-        const isSelected = dayjs(date).isSame(selected, 'date');
-        if (!isSelected) {
-            setSelected(date);
-        }
-    };
-
-    return (
-        <Calendar
-            locale="ru"
-            getDayProps={(date) => ({
-                selected: dayjs(date).isSame(selected, 'date'),
-                onClick: () => handleSelect(date),
-            })}
-        />
-    )
+type Props = {
+    header?: React.ReactNode
+    footer?: React.ReactNode
 }
 
-const SideBar = () => {
-    const [opened, {open, close}] = useDisclosure(false);
+const SideBar: React.FC<Props> = props => {
+    // const [opened, {open, close}] = useDisclosure(false);
 
     return (
         <aside className={style.sidebar}>
+            {props.header}
             <Rounded style={{padding: "10px"}}>
                 <WeekPicker/>
             </Rounded>
-            <SelectOptionComponent/>
+            <SelectOptionComponent classNames={{dropdown: style.dropdown}} targetClassNames={{input: style.input}}/>
+            {props.footer}
             {/*<div className="tablet-or-mobile">*/}
             {/*    <Modal*/}
             {/*        opened={opened}*/}
